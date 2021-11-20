@@ -2,7 +2,7 @@
 
 ### Level 1
 
-O fetching dos dados foi feito utilizando o axios. E as informações foram dispostas na pagina home de acorrdo com a iamgem abaixo:
+O fetching dos dados foi feito utilizando o axios. E as informações foram dispostas na pagina home de acordo com a iamgem abaixo:
 
 ![image](https://user-images.githubusercontent.com/71605566/142710641-4d355fb0-4ef2-4f26-901f-3aba7585bbb1.png)
 
