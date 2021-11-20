@@ -12,29 +12,7 @@ import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../util/format";
 import { Container, ProductTable, Total } from "./styles";
 
-interface Car {
-  id: number;
-  brand: string;
-  model: string;
-  picturePath: string;
-  pricePerDay: number;
-  pricePerKm: number;
-  availability: {
-    maxDuration: number;
-    maxDistance: number
-  };
- duration:number;
- distance:number;
- distangeRange:number[],
- durationRange:number[];
- subTotal:number;
-  
-}
-
-  
-
-
-
+import {Car} from '../../types'
 
 
 const Cart = (): JSX.Element => {
@@ -43,8 +21,6 @@ const Cart = (): JSX.Element => {
   const[cartCar,setCartCar] = useState(cart)
 
   const [totalValue,setTotalValue] = useState<number>() 
-
-  console.log(cart)
 
  
   const handleIncreaseDistance= async(car:Car) => {
@@ -315,7 +291,7 @@ const Cart = (): JSX.Element => {
 
         <Total>
           <span>TOTAL</span>
-          <strong>{totalValue}</strong>
+          <strong>{formatPrice(totalValue as number)}</strong>
         </Total>
       </footer>
     </Container>

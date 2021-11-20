@@ -7,30 +7,13 @@ import Header from '../../components/Header/index';
 import { MdAddShoppingCart } from "react-icons/md";
 import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../util/format";
+import {Car} from '../../types'
 
 const { Option } = Select;
 const { Item } = Form;
 const { TextArea } = Input;
 const { Title } = Typography;
 
-interface Car {
-  id: number;
-  brand: string;
-  model: string;
-  picturePath: string;
-  pricePerDay: number;
-  pricePerKm: number;
-  availability: {
-    maxDuration: number;
-    maxDistance: number
-  };
- duration:number;
- distance:number;
- distangeRange:number[],
- durationRange:number[];
- subTotal:number;
-  
-}
 
 
 export const Home: React.FC = () => {
@@ -41,9 +24,7 @@ export const Home: React.FC = () => {
   const { addProduct } = useCart();
   const formResult: any = [];
 
-  console.log("form", formResult);
-  console.log("allDataFiltered", allDataFiltered);
-  console.log("allData", allData);
+  
 
   const distanceRange = [];
   const durationRange = [];
@@ -62,8 +43,7 @@ export const Home: React.FC = () => {
    
   const onSubmit = (values: any) => {
     formResult.push(values);
-    console.log("ausdhuashduu", formResult);
-    console.log("values", values);
+
     api.get(`cars.json?duration=${formResult[0] }?distance=${formResult[1]}`).then((response) => 
     setAllData(response.data));
     form.resetFields();
@@ -87,9 +67,9 @@ export const Home: React.FC = () => {
     let priceDayWithDiscount =priceDay
     if (duration > 1) {
       priceDayWithDiscount = priceDay * 0.9;
-    } else if (duration >= 4) {
+    } else if (duration > 4) {
        priceDayWithDiscount = priceDay * 0.7;
-    } else if (duration >= 10) {
+    } else if (duration > 10) {
       priceDayWithDiscount = priceDay * 0.5;
     }
     return duration * priceDayWithDiscount + distance * priceKm;
@@ -165,7 +145,7 @@ export const Home: React.FC = () => {
         </Button>
       </Form>
 
-      <button>Clean Filters</button>
+      <Button onClick={()=>  api.get("cars.json").then((response) => setAllData(response.data))}type="primary">Clean Filters</Button>
       </FiltersSection>
       <CardsSection>
       <Cards>
